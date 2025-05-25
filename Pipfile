@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+sqlalchemy = "*"
+faker = "*"
+mcp = "*"
+langchain = "*"
+dotenv = "*"
+alembic = "*"
+rich = "*"
+pep8 = "*"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
