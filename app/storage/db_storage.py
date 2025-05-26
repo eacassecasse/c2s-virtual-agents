@@ -38,6 +38,18 @@ class DBStorage:
         if C2S_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
+    def start_transaction(self):
+        """ Begins a new transaction """
+        self.__session.begin()
+
+    def commit(self):
+        """ Commits the current transaction """
+        self.__session.commit()
+
+    def rollback(self):
+        """ Rollback the current transaction """
+        self.__session.rollback()
+
     def all(self, cls=None):
         """query on the current database session"""
         new_dict = {}
@@ -61,6 +73,10 @@ class DBStorage:
         """delete from the current database session obj if not None"""
         if obj is not None:
             self.__session.delete(obj)
+
+    def delete_all(self, cls):
+        """ Deletes all records from a provided class """
+        self.__session.query(cls).delete()
 
     def reload(self):
         """reloads data from the database"""

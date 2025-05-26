@@ -8,10 +8,12 @@ sqlalchemy = "*"
 faker = "*"
 mcp = "*"
 langchain = "*"
-dotenv = "*"
 alembic = "*"
 rich = "*"
 pep8 = "*"
+mysql-connector-python = "*"
+mysqlclient = "*"
+dotenv = "*"
 python-dotenv = "*"
 
 [dev-packages]

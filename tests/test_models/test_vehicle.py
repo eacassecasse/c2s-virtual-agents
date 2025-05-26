@@ -73,11 +73,11 @@ class TestVehicle(unittest.TestCase):
     def test_vehicle_model_id_attr(self):
         """Test Vehicle has attr vehicle_model_id, and it's an empty string"""
         vehicle = Vehicle()
-        self.assertTrue(hasattr(vehicle, "model_id"))
+        self.assertTrue(hasattr(vehicle, "vehicle_model_id"))
         if app.models.storage_t == 'db':
-            self.assertEqual(vehicle.model_id, None)
+            self.assertEqual(vehicle.vehicle_model_id, None)
         else:
-            self.assertEqual(vehicle.model_id, "")
+            self.assertEqual(vehicle.vehicle_model_id, "")
 
     def test_license_plate_attr(self):
         """Test Vehicle has attr license_plate, and it's an empty string"""
@@ -189,9 +189,9 @@ class TestVehicle(unittest.TestCase):
         p = Vehicle()
         new_d = p.to_dict()
         self.assertEqual(type(new_d), dict)
-        self.assertFalse("_sa_instance_state" in new_d)
+        self.assertFalse("_sa_instance_brand" in new_d)
         for attr in p.__dict__:
-            if attr != "_sa_instance_state":
+            if attr != "_sa_instance_brand":
                 self.assertTrue(attr in new_d)
         self.assertTrue("__class__" in new_d)
 

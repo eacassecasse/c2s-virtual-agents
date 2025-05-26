@@ -29,14 +29,14 @@ class DriveTrainType(enum.Enum):
     FWD = "FWD"
     RWD = "RWD"
     AWD = "AWD"
-    _4WD = "4WD"
+    FOUR_WD = "4WD"
 
 
 class Vehicle(BaseModel, Base):
     """Representation of Vehicle """
     if models.storage_t == 'db':
         __tablename__ = 'vehicles'
-        model_id = Column(
+        vehicle_model_id = Column(
             String(60),
             ForeignKey('vehicle_models.id'),
             nullable=False)
@@ -60,7 +60,7 @@ class Vehicle(BaseModel, Base):
             nullable=False,
             default=DriveTrainType.FWD)
     else:
-        model_id = ""
+        vehicle_model_id = ""
         license_plate = ""
         engine_number = ""
         chassis_number = ""
