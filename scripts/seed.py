@@ -4,6 +4,7 @@ Seeds the storage with fake data
 """
 from sqlalchemy.exc import SQLAlchemyError
 
+import app.models
 from app.models import storage
 from app.db.data_seeder import DataSeeder
 from app.models.brand import Brand
@@ -19,12 +20,13 @@ def run_seed():
     seeder = DataSeeder()
 
     try:
-        storage.start_transaction()
+        if app.models.storage_t == "db":
+            storage.start_transaction()
 
-        print("Cleaning existing data...")
-        storage.delete_all(Vehicle)
-        storage.delete_all(VehicleModel)
-        storage.delete_all(Brand)
+            print("Cleaning existing data...")
+            storage.delete_all(Vehicle)
+            storage.delete_all(VehicleModel)
+            storage.delete_all(Brand)
 
         print("Generating brands data...")
         brands_data = seeder.generate_data(Brand)
@@ -33,6 +35,7 @@ def run_seed():
         for brand_data in brands_data:
             brand = Brand(**brand_data)
             storage.new(brand)
+        storage.save()
 
         print("Fetching brands from the storage...")
         brands = list(storage.all(Brand).values())
@@ -46,6 +49,7 @@ def run_seed():
         for model_data in models_data:
             vehicle_model = VehicleModel(**model_data)
             storage.new(vehicle_model)
+        storage.save()
 
         print("Fetching vehicle models from the storage...")
         vehicle_models = list(storage.all(VehicleModel).values())
@@ -59,15 +63,19 @@ def run_seed():
         for vehicle_data in vehicles_data:
             vehicle = Vehicle(**vehicle_data)
             storage.new(vehicle)
+        storage.save()
 
-        storage.commit()
+        if app.models.storage_t == "db":
+            storage.commit()
         print("Seeding completed successfully!")
     except SQLAlchemyError as er:
-        storage.rollback()
+        if app.models.storage_t == "db":
+            storage.rollback()
         print(f"Data insertion failure {str(er)}")
         raise er
     except Exception as ex:
-        storage.rollback()
+        if app.models.storage_t == "db":
+            storage.rollback()
         print(f"Unexpected error {str(ex)}")
         raise
     finally:
