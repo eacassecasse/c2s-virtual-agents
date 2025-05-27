@@ -67,10 +67,12 @@ python -m app.cli.console
 
 ---
 
-## **🎥 Demo**  
-[![Demo Video](https://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/VIDEO_ID)  
+[//]: # (## **🎥 Demo**  )
 
-*(Click to watch a quick demo of the system in action!)*  
+[//]: # ([![Demo Video]&#40;https://img.youtube.com/vi/VIDEO_ID/0.jpg&#41;]&#40;https://youtu.be/VIDEO_ID&#41;  )
+
+[//]: # ()
+[//]: # (*&#40;Click to watch a quick demo of the system in action!&#41;*  )
 
 ---
 
